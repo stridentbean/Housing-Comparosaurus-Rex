@@ -14,10 +14,16 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	robots, err := ioutil.ReadAll(res.Body)
+	rawText, err := ioutil.ReadAll(res.Body)
 	res.Body.Close()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%s", robots)
+	
+	fmt.Printf("%s", rawText)
+	
+	// write whole the body
+    err = ioutil.WriteFile("output.txt", rawText, 0644)
+    if err != nil { panic(err) }
+		
 }
